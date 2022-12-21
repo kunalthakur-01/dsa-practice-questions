@@ -12,7 +12,7 @@ public:
 
         for(int i = 0; i < path.length(); i++){
             if(temp.top() == "/"){
-                temp.push(path[i]);
+                // temp.push(path[i]);
             }
         }
 
