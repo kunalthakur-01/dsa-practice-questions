@@ -34,32 +34,63 @@ node* buildTree(node* root) {
 
 }
 
-int heightOfTree(node* root) {
-    if(root == NULL) {
-        return 0;
+
+// solution 1 with n^2 time complexity
+// int heightOfTree(node* root) {
+//     if(root == NULL) {
+//         return 0;
+//     }
+
+//     int left = heightOfTree(root -> left);
+//     int right = heightOfTree(root -> right);
+
+//     int ans = max(left, right) + 1;
+//     return ans;
+
+// }
+
+// int diameterOfTree(node* root) {
+//     if(root == NULL) {
+//         return 0;
+//     }
+
+//     int op1 = diameterOfTree(root -> left);
+//     int op2 = diameterOfTree(root -> right);
+//     int op3 = heightOfTree(root -> left) + heightOfTree(root -> right) + 1;
+
+//     int ans = max(op1, max(op2, op3));
+//     return ans;
+// }
+
+
+
+
+// solution 2 with n time complexity
+
+pair<int, int> diameter(node* root) {
+    if(root == NULL){
+        pair<int, int> p = make_pair(0,0);
+        return p;
     }
 
-    int left = heightOfTree(root -> left);
-    int right = heightOfTree(root -> right);
+    pair<int, int> left = diameter(root -> left);
+    pair<int, int> right = diameter(root -> right);
 
-    int ans = max(left, right) + 1;
+    int opt1 = left.first;
+    int opt2 = right.first;
+    int opt3 = left.second + right.second + 1;
+
+    pair<int, int> ans;
+    ans.first = max(opt1, max(opt2, opt3));
+    ans.second = max(left.second, right.second) + 1;
+
     return ans;
-
 }
 
 int diameterOfTree(node* root) {
-    if(root == NULL) {
-        return 0;
-    }
-
-    int op1 = diameterOfTree(root -> left);
-    int op2 = diameterOfTree(root -> right);
-    int op3 = heightOfTree(root -> left) + heightOfTree(root -> right) + 1;
-
-    int ans = max(op1, max(op2, op3));
-    return ans;
-
+    return diameter(root).first;
 }
+
 
 
 int main()
