@@ -54,8 +54,7 @@ void deleteFromPositon(Node *&head, Node *&tail, int position) {
         }
 
         if(curr -> next == NULL) {
-            previous -> next = NULL;
-            curr -> next = NULL;
+            previous -> next = curr -> next;
             curr -> prev = NULL;
             tail = previous;
             delete curr;
@@ -157,7 +156,7 @@ int main()
     cout<< "Head ->" << head -> data << endl;
     cout<< "tail ->" << tail -> data << endl;
 
-    deleteFromPositon(head, tail, 4);
+    deleteFromPositon(head, tail, 2);
     print(head);
 
     cout<< "Head ->" << head -> data << endl;
