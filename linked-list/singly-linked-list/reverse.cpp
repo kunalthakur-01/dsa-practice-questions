@@ -1,31 +1,36 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-class Node {
+class Node
+{
 public:
     int data;
-    Node* next;
+    Node *next;
 
-    Node(int data) {
-        this -> data = data;
-        this -> next = NULL;
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
     }
 };
 
-void reverse(Node* &head, Node* &tail){
-    if(head == NULL || head -> next == NULL) {
+void reverse(Node *&head, Node *&tail)
+{
+    if (head == NULL || head->next == NULL)
+    {
         // return head;
         return;
     }
 
-    Node* prev = NULL;
-    Node* curr = head;
+    Node *prev = NULL;
+    Node *curr = head;
     tail = head;
-    Node* forward = NULL;
+    Node *forward = NULL;
 
-    while(curr != NULL) {
-        forward = curr -> next;
-        curr -> next = prev;
+    while (curr != NULL)
+    {
+        forward = curr->next;
+        curr->next = prev;
         prev = curr;
         curr = forward;
     }
@@ -34,71 +39,76 @@ void reverse(Node* &head, Node* &tail){
 }
 
 // insertion at the begining of the list
-void insertAtHead(Node* &head, int data) {
-    Node* temp = new Node(data);
+void insertAtHead(Node *&head, int data)
+{
+    Node *temp = new Node(data);
 
-    temp -> next = head;
+    temp->next = head;
     head = temp;
 }
 
-
 // insertion at the end of the list
-void insertAtTail(Node* &tail, int data) {
+void insertAtTail(Node *&tail, int data)
+{
 
-    Node* temp = new Node(data);
-    tail -> next = temp;
+    Node *temp = new Node(data);
+    tail->next = temp;
     tail = temp;
 }
 
-
 // insertion at any position
-void insertAtPosition(Node* &head, Node* &tail, int data, int position) {
+void insertAtPosition(Node *&head, Node *&tail, int data, int position)
+{
 
     // insert at start
-    if(position == 1) {
+    if (position == 1)
+    {
         insertAtHead(head, data);
         return;
     }
 
-    Node* temp = head;
+    Node *temp = head;
     int counter = 1;
 
-    while(counter < position - 1) {
-        temp = temp -> next;
+    while (counter < position - 1)
+    {
+        temp = temp->next;
         counter++;
     }
 
     // insert at end
-    if(temp -> next == NULL) {
+    if (temp->next == NULL)
+    {
         insertAtTail(tail, data);
         return;
     }
 
     // insert at given position
-    Node* newNode = new Node(data);
-    newNode -> next = temp -> next;
-    temp -> next = newNode;
-
+    Node *newNode = new Node(data);
+    newNode->next = temp->next;
+    temp->next = newNode;
 }
-
 
 // print the singly linked list
-void print(Node* &head) {
+void print(Node *&head)
+{
 
-    Node* temp = head;
+    Node *temp = head;
 
-    while(temp != NULL) {
-        cout<< temp -> data << " ";
-        temp = temp -> next;
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->next;
     }
-    cout<<endl;
+    cout << endl;
 }
 
-int main(){
-    Node* node1 = new Node(1);
- 
-    Node* head = node1;
-    Node* tail = node1;
+int main()
+{
+    Node *node1 = new Node(1);
+
+    Node *head = node1;
+    Node *tail = node1;
     print(head);
 
     insertAtPosition(head, tail, 2, 2);
