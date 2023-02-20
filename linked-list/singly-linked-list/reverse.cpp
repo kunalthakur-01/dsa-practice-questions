@@ -12,13 +12,15 @@ public:
     }
 };
 
-Node* reverse(Node* &head){
+void reverse(Node* &head, Node* &tail){
     if(head == NULL || head -> next == NULL) {
-        return head;
+        // return head;
+        return;
     }
 
     Node* prev = NULL;
     Node* curr = head;
+    tail = head;
     Node* forward = NULL;
 
     while(curr != NULL) {
@@ -27,7 +29,8 @@ Node* reverse(Node* &head){
         prev = curr;
         curr = forward;
     }
-    return prev;
+    head = prev;
+    // return prev;
 }
 
 // insertion at the begining of the list
@@ -104,8 +107,14 @@ int main(){
 
     print(head);
 
-    reverse(head);
+    // cout<< "Head ->" << head -> data << endl;
+    // cout<< "tail ->" << tail -> data << endl;
 
+    reverse(head, tail);
     print(head);
+
+    // cout<< "Head ->" << head -> data << endl;
+    // cout<< "tail ->" << tail -> data << endl;
+
     return 0;
 }
