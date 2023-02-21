@@ -14,29 +14,65 @@ public:
     }
 };
 
-void reverse(Node *&head, Node *&tail)
-{
-    if (head == NULL || head->next == NULL)
-    {
-        // return head;
+
+// Recursively reverse
+void recursivelySolve(Node* &head, Node* &curr, Node* &prev) {
+    if(curr == NULL){
+        head = prev;
         return;
     }
 
-    Node *prev = NULL;
-    Node *curr = head;
-    tail = head;
-    Node *forward = NULL;
+    Node* forward = curr -> next;
+    recursivelySolve(head, forward, curr);
+    curr -> next = prev;
+} 
 
-    while (curr != NULL)
-    {
-        forward = curr->next;
-        curr->next = prev;
-        prev = curr;
-        curr = forward;
-    }
-    head = prev;
-    // return prev;
+// another soltion with recursion
+// Node* recursivelySolve(Node* head){
+//     if(head == NULL || head -> next == NULL){
+//         return head;
+//     }
+
+//     Node* childHead = recursivelySolve(head -> next);
+
+//     head -> next -> next = head;
+//     head -> next = NULL;
+
+//     return childHead;
+// }
+
+void reverse(Node* &head, Node* &tail) {
+    Node* curr = head;
+    tail = head;
+    Node* prev = NULL;
+    recursivelySolve(head, curr, prev);
 }
+
+
+// iteratively reverse
+// void reverse(Node *&head, Node *&tail)
+// {
+//     if (head == NULL || head->next == NULL)
+//     {
+//         // return head;
+//         return;
+//     }
+
+//     Node *prev = NULL;
+//     Node *curr = head;
+//     tail = head;
+//     Node *forward = NULL;
+
+//     while (curr != NULL)
+//     {
+//         forward = curr->next;
+//         curr->next = prev;
+//         prev = curr;
+//         curr = forward;
+//     }
+//     head = prev;
+//     // return prev;
+// }
 
 // insertion at the begining of the list
 void insertAtHead(Node *&head, int data)
