@@ -14,23 +14,66 @@ public:
     }
 };
 
+// fing length of a linked list
+int getLength(Node* &head) {
+    Node* temp = head;
+    int cnt = 0;
 
-// find middle element
-int middleElement(Node* head, int cnt){
-    if(head == NULL || head -> next == NULL) {
-        return cnt;
+    while(temp != NULL) {
+        temp = temp -> next;
+        cnt++;
     }
 
-    int totalCnt =  middleElement(head -> next, cnt++);
-
-    // if(cnt % 2 == 0){
-    //     if(cnt == totalCnt / 2){
-    //         return head -> data
-    //     }
-    //     else 
-    // }
-
+    return cnt;
 }
+
+// approach 1************************************************************************************************************************
+// find middle element
+// Node* middleElement(Node* head){
+//     int len = getLength(head);
+
+//     int ans = len / 2;
+    
+//     Node* temp = head;
+//     int cnt = 0;
+
+//     while(cnt < ans){
+//         temp = temp -> next;
+//         cnt++;
+//     }
+
+//     cout << temp -> data;
+//     return temp;
+// }
+
+
+
+// approach 2************************************************************************************************************************
+// find middle element
+Node* middleElement(Node* head){
+    if(head == NULL || head -> next == NULL){
+        return head;
+    }
+    if(head -> next -> next == NULL) {
+        return head -> next;
+    }
+
+    Node* slow = head;
+    Node* fast = head -> next;
+
+    while(fast != NULL) {
+        fast = fast -> next;
+        if(fast != NULL){
+            fast = fast -> next;
+        }
+
+        slow = slow -> next;
+    }
+
+    cout<< slow -> data;
+    return slow;
+}
+
 
 
 // insertion at the begining of the list
@@ -109,6 +152,7 @@ int main()
     insertAtPosition(head, tail, 2, 2);
     insertAtPosition(head, tail, 3, 3);
     insertAtPosition(head, tail, 4, 4);
+    insertAtPosition(head, tail, 10, 5);
 
     print(head);
 
@@ -119,6 +163,8 @@ int main()
 
     // cout<< "Head ->" << head -> data << endl;
     // cout<< "tail ->" << tail -> data << endl;
+
+    middleElement(head);
 
     return 0;
 }
