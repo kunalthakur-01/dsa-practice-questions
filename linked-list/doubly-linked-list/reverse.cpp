@@ -13,6 +13,25 @@ public:
     }
 };
 
+void reverse(Node* &head, Node* &tail){
+    if(head == NULL){
+        return;
+    }
+
+    Node* prevNode = NULL;
+    Node* currNode = head;
+    tail = head;
+
+    while(currNode != NULL){
+        prevNode = currNode;
+        currNode = currNode -> next;
+        prevNode -> next = prevNode -> prev;
+        prevNode -> prev = currNode;
+    }
+
+    head = prevNode;
+}
+
 // insertion at the begining of the list
 void insertAtHead(Node* &head, Node* &tail, int data) {
     Node* temp = new Node(data);
@@ -98,27 +117,21 @@ int main(){
  
     Node* head = NULL;
     Node* tail = NULL;
-    // Node* head = node1;
-    // Node* tail = node1;
-    print(head);
 
     // insert at the begin
     insertAtHead(head, tail, 10);
     insertAtHead(head, tail, 5);
-    print(head);
-
 
     // insert at the end
     insertAtTail(tail, head, 20);
     insertAtTail(tail, head, 30);
-    print(head);
-
 
     // insert at any position
-    insertAtPosition(head, tail, 25, 5);
+    insertAtPosition(head, tail, 25, 4);
     print(head);
 
-    // cout<< head -> data << " ";
-    // cout<< tail -> data;
+    reverse(head, tail);
+
+    print(head);
     return 0;
 }
