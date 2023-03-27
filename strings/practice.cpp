@@ -4,6 +4,9 @@ using namespace std;
 void practice(char *ch){
     cout<< &ch<<endl;
     cout<< ch;
+    for(int i = 0; i < 5; i++){
+        cout<< ch[i] << " ";
+    }
 }
 
 int main(){
