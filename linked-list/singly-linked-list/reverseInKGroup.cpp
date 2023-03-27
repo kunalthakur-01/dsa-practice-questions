@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 class Node
@@ -12,53 +12,29 @@ public:
     }
 };
 
-
-void reverseGroup(Node *&head, Node *&tail)
-{
-    if (head == NULL || head -> next == NULL)
-    {
-        // return head;
-        return;
+Node* reverseInKGroup(Node* &head, int k){
+    if(head == NULL){
+        return NULL;
     }
 
-    Node *prev = NULL;
-    Node *curr = head;
-    tail = head;
-    Node *forward = NULL;
+    Node* prev = NULL;
+    Node* curr = head;
+    Node* forward = NULL;
+    int count = 0;
 
-    while (curr != NULL)
-    {
-        forward = curr->next;
-        curr->next = prev;
+    while(curr != NULL && count < k){
+        forward = curr -> next;
+        curr -> next = prev;
         prev = curr;
         curr = forward;
-    }
-    head = prev;
-    // cout<< head -> data << " " << tail -> data;
-}
-
-void reverseInKGroup(Node * &head, Node * &tail, int k){
-    Node* temp = head;
-    Node* tempHead = head;
-    Node* tempTail = tail;
-    int count = 1;
-
-    while(temp != NULL){
-            // cout<< tempHead -> data << " " << tempTail -> data;
-        if(count == 1){
-            cout<< temp -> data << " ";
-            tempHead = temp;
-        }
-        if(count == k){
-            count = 1;
-            tempTail = temp;
-            // reverseGroup(tempHead, tempTail);
-            temp = temp -> next;
-            continue;
-        }
-        temp = temp -> next;
         count++;
     }
+
+    if(forward != NULL) {
+        head -> next = reverseInKGroup(forward, k);
+    }
+
+    return prev;
 }
 
 // insertion at the begining of the list
@@ -141,8 +117,8 @@ int main(){
 
     print(head);
 
-    reverseInKGroup(head, tail, 2);
+    reverseInKGroup(head, 2);
 
-    // print(head);
+    print(head);
     return 0;
 }
