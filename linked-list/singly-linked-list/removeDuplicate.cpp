@@ -13,14 +13,18 @@ public:
 };
 
 void removeDuplicate(Node* &head) {
+    if(head == NULL) {
+        return;
+    }
     Node* curr = head;
     Node* forward = head -> next;
 
     while(forward != NULL) {
         if(curr -> data == forward -> data) {
+            Node* nodeToDelete = forward;
             curr -> next = forward -> next;
             forward = forward -> next;
-            // delete curr;
+            delete(nodeToDelete);
             continue;
         }
         curr = forward;
