@@ -12,7 +12,8 @@ public:
     }
 };
 
-void removeDuplicate(Node* &head) {
+// remove duplicates from sorted linked list
+void removeDuplicateFromSorted(Node* &head) {
     if(head == NULL) {
         return;
     }
@@ -29,6 +30,34 @@ void removeDuplicate(Node* &head) {
         }
         curr = forward;
         forward = forward -> next;
+    }
+}
+
+// remove duplicates from unsorted linked list
+void removeDuplicateFromUnsorted(Node* &head) {
+    if(head == NULL) {
+        return;
+    }
+    Node* outer = head;
+    Node* inner = head;
+    Node* prev = NULL;
+
+    while(outer != NULL){
+        inner = head;
+        prev = NULL;
+        while(inner != NULL){
+            if((outer -> data == inner -> data) && (outer != inner)) {
+                Node* nodeToDelete = inner;
+                prev -> next = inner -> next;
+                inner = inner -> next;
+                delete(nodeToDelete);
+            }
+            else {
+                prev = inner;
+                inner = inner -> next;
+            }
+        }
+        outer = outer -> next;
     }
 }
 
@@ -121,7 +150,7 @@ int main(){
     print(head);
 
     // cout<< tail;
-    removeDuplicate(head);
+    removeDuplicateFromUnsorted(head);
     print(head);
 
     // cout<< head -> data << " ";
