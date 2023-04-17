@@ -33,20 +33,23 @@ void removeDuplicateFromSorted(Node* &head) {
     }
 }
 
+
 // remove duplicates from unsorted linked list
+// not optimal solution(time complexity n^2)
+// for optimal solution(time complexity in n then use map but space complexity will also be n)
 void removeDuplicateFromUnsorted(Node* &head) {
     if(head == NULL) {
         return;
     }
     Node* outer = head;
-    Node* inner = head;
+    Node* inner = outer -> next;
     Node* prev = NULL;
 
     while(outer != NULL){
-        inner = head;
-        prev = NULL;
+        inner = outer -> next;
+        prev = outer;
         while(inner != NULL){
-            if((outer -> data == inner -> data) && (outer != inner)) {
+            if(outer -> data == inner -> data) {
                 Node* nodeToDelete = inner;
                 prev -> next = inner -> next;
                 inner = inner -> next;
