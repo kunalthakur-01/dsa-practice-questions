@@ -34,7 +34,7 @@ node* buildTree(node* root) {
 
 }
 
-
+// approach 1
 int heightOfTree(node* root) {
     if(root == NULL) {
         return 0;
@@ -45,7 +45,23 @@ int heightOfTree(node* root) {
 
     int ans = max(left, right) + 1;
     return ans;
+}
 
+// approach 2
+int treeHeight(node* root, int cnt, int height){
+    if(root == NULL) {
+        // cout<< cnt << " " << height << endl;
+        if(cnt > height) height = cnt;
+        return height;
+    }
+    
+    cnt++;
+    
+    height = treeHeight(root -> left, cnt, height);
+    
+    height = treeHeight(root -> right, cnt, height);
+    
+    return height;
 }
 
 
