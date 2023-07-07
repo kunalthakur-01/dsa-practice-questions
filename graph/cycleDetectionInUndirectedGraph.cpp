@@ -15,6 +15,7 @@ void preparedList(unordered_map<int , list<int>> &adjlist, vector<vector<int>> &
     }
 }
 
+// using BFS
 bool isCycle(unordered_map<int , list<int>> &adjList, unordered_map<int, bool> &visited, int node){
     unordered_map<int, int> parent;
 
