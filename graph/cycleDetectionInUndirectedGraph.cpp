@@ -15,7 +15,7 @@ void preparedList(unordered_map<int , list<int>> &adjlist, vector<vector<int>> &
     }
 }
 
-// using BFS
+// using BFS*****************************************************************************************************************************
 bool isCycle(unordered_map<int , list<int>> &adjList, unordered_map<int, bool> &visited, int node){
     unordered_map<int, int> parent;
 
@@ -59,4 +59,40 @@ string cycleDetection(vector<vector<int>>& edges, int n, int m){
 
     return "No";
 }
+
+
+
+// using DFS*****************************************************************************************************************************
+bool isCycle(int node, int parent, unordered_map<int , list<int>> &adjList, unordered_map<int, bool> &visited){
+    visited[node] = true;
+
+        for(auto i : adjList[node]) {
+            if(!visited[i]){
+                bool cycleDetected = isCycle(i, node, adjList, visited);
+                if(cycleDetected) return true;
+            }
+            else if(i != parent) {
+                return true;
+            }
+        }
+    return false;
+}
+
+string cycleDetection(vector<vector<int>>& edges, int n, int m){
+    unordered_map<int , list<int>> adjList;
+    unordered_map<int, bool> visited;
+
+    preparedList(adjList, edges);
+
+    for(int i = 0; i < n; i++) {
+        if(!visited[i]) {
+            bool ans = isCycle(i, -1, adjList, visited);
+            if(ans == 1) return "Yes";
+        }
+    }
+
+    return "No";
+}
+
+
 
