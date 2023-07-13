@@ -27,7 +27,7 @@ public:
 };
 
 
-// adjacency list implementation with map
+// adjacency list implementation with vector
 vector<vector<int>> printGraph(int n, int m, vector<vector<int>> edges){
     vector<int> ans[n];
 
