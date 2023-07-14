@@ -17,20 +17,20 @@ void topoSort(int node, vector<bool> &visited, stack<int> &s, unordered_map<int 
     s.push(node);
 }
 
-vector<int> topologicalSort(vector<pair<int,int>>& edges, int N, int M){
+vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e){
 	unordered_map<int , list<int>> adjList;
 
     for(int i = 0; i < edges.size(); i++) {
-        int u = edges[i].first;
-        int v = edges[i].second;
+        int u = edges[i][0];
+        int v = edges[i][1];
 
         adjList[u].push_back(v);
     }
 
-    vector<bool> visited(N);
+    vector<bool> visited(v);
     stack<int> s;
 
-    for(int i = 0; i < N; i++){
+    for(int i = 0; i < v; i++){
         if(!visited[i]){
             topoSort(i, visited, s, adjList);
         }
