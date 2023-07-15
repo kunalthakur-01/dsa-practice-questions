@@ -14,7 +14,6 @@ int fibonacci(int n, vector<int> &dp){
     return dp[n];
 }
 
-
 int main(){
     int n = 4;
     vector<int> dp(n+1, -1);
