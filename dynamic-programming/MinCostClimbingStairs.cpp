@@ -68,7 +68,7 @@ using namespace std;
 
 
 
-// Bottom up approach
+// memory optimization approach
 class Solution {
 public:
     int minCostClimbingStairs(vector<int>& cost) {
