@@ -43,20 +43,47 @@ using namespace std;
 // }
 
 // Bottom up approach*******************************************************************************************************************
-int frogJump(int n, vector<int> heights) {
-    vector<int> dp;
+// int frogJump(int n, vector<int> heights) {
+//     vector<int> dp;
 
-    dp[0] = 0;
+//     dp[0] = 0;
+
+//     for(int i = 1; i < n; i++) {
+//         int firstStep = dp[i - 1] + abs(heights[i] - heights[i-1]);
+//         int secondStep =  INT_MAX;
+//         if(i > 1) secondStep = dp[i - 2] + abs(heights[i] - heights[i-2]);
+
+//         dp[i] = min(firstStep, secondStep);
+//     }
+
+//     return dp[n - 1];
+// }
+
+// int main() {
+//     vector<int> heights = {20,30,40,10};
+//     int n = heights.size();
+//     frogJump(n, heights);
+// }
+
+
+
+
+// Space optimization*******************************************************************************************************************
+int frogJump(int n, vector<int> heights) {
+    int prev1 = 0;
+    int prev2 = 0;
 
     for(int i = 1; i < n; i++) {
-        int firstStep = dp[i - 1] + abs(heights[i] - heights[i-1]);
+        int firstStep = prev1 + abs(heights[i] - heights[i-1]);
         int secondStep =  INT_MAX;
-        if(i > 1) secondStep = dp[i - 2] + abs(heights[i] - heights[i-2]);
+        if(i > 1) secondStep = prev2 + abs(heights[i] - heights[i-2]);
 
-        dp[i] = min(firstStep, secondStep);
+        int curr = min(firstStep, secondStep);
+        prev2 = prev1;
+        prev1 = curr;
     }
 
-    return dp[n - 1];
+    return prev1;
 }
 
 int main() {
